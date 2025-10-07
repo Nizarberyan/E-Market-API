@@ -1,0 +1,28 @@
+{
+  "dependencies": {
+    "express": "^5.1.0",
+    "yup": "^1.7.1"
+  },
+  "name": "e-market-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "bun --hot server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nizarberyan/E-Market-API.git"
+  },
+  "author": "Nizar Beriane",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/Nizarberyan/E-Market-API/issues"
+  },
+  "homepage": "https://github.com/Nizarberyan/E-Market-API#readme"
+}
