@@ -242,7 +242,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"title\": \"Laptop\",\n  \"description\": \"High-performance laptop\",\n  \"price\": 8999,\n  \"stock\": 10,\n  \"category\": \"507f1f77bcf86cd799439011\",\n  \"imageUrl\": \"https://example.com/image.jpg\"\n}",
+									"raw": "{\n  \"title\": \"Laptop 2\",\n  \"description\": \"High-performance laptop\",\n  \"price\": 8999,\n  \"stock\": 10,\n  \"category\": \"507f1f77bcf86cd799439011\",\n  \"imageUrl\": \"https://example.com/image.jpg\"\n}",
 									"options": {
 										"raw": {
 											"headerFamily": "json",
@@ -1057,6 +1057,61 @@
 					"item": [
 						{
 							"name": "Get category by ID",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "6547763e-f6ad-4243-a59e-dc0f3e2cd4e8",
+										"exec": [
+											"// Test script for Get category by ID",
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"Response time is acceptable\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(1000);",
+											"});",
+											"",
+											"pm.test(\"Content-Type header is application/json\", function () {",
+											"    pm.response.to.have.header(\"Content-Type\");",
+											"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+											"});",
+											"",
+											"pm.test(\"Response is a valid JSON object\", function () {",
+											"    pm.response.to.be.json;",
+											"    const responseData = pm.response.json();",
+											"    pm.expect(responseData).to.be.an('object');",
+											"});",
+											"",
+											"pm.test(\"Category object has required properties\", function () {",
+											"    const responseData = pm.response.json();",
+											"    pm.expect(responseData).to.have.property('_id');",
+											"    pm.expect(responseData).to.have.property('name');",
+											"    pm.expect(responseData).to.have.property('description');",
+											"    pm.expect(responseData).to.have.property('createdAt');",
+											"    pm.expect(responseData).to.have.property('updatedAt');",
+											"});",
+											"",
+											"pm.test(\"Category ID in response matches request ID\", function () {",
+											"    const responseData = pm.response.json();",
+											"    const requestId = pm.request.url.path[1];",
+											"    pm.expect(responseData._id).to.equal(requestId);",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "458e8266-cda6-45e0-b3a9-6fe9dfbdefd6",
+										"exec": [],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"id": "48538478-ed8f4bbd-067c-4ce9-905c-aed60b4365ef",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
