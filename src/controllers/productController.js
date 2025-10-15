@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 
 export const getAllProducts = async (req, res, next) => {
   try {
-    const products = await Product.find().populate('category');
+    const products = await Product.find();
     res.json(products);
   } catch (error) {
     next(error);
@@ -16,7 +16,7 @@ export const getProductById = async (req, res, next) => {
     if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
       return res.status(400).json({ message: 'Invalid product ID' });
     }
-    const product = await Product.findById(req.params.id).populate('category');
+    const product = await Product.findById(req.params.id);
     if (!product) {
       return res.status(404).json({ message: 'Product not found' });
     }
@@ -86,7 +86,7 @@ export const searchProducts = async (req, res, next) => {
       if (maxPrice) filter.price.$lte = Number(maxPrice);
     }
     
-    const products = await Product.find(filter).populate('category');
+    const products = await Product.find(filter);
     res.json(products);
   } catch (error) {
     next(error);
