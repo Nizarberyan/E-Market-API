@@ -1410,6 +1410,18 @@
 							"script": {
 								"id": "944f93c5-ad65-4161-bea2-6b908f01f9e4",
 								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "7a03ade1-4717-4e41-8012-d8d84e5a92db",
+								"exec": [
 									"// Test for successful response",
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
@@ -1460,14 +1472,6 @@
 								"type": "text/javascript",
 								"packages": {},
 								"requests": {}
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"id": "5dfdff06-cacf-45df-b616-78ec8b678ee9",
-								"exec": [],
-								"type": "text/javascript"
 							}
 						}
 					],
