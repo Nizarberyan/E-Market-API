@@ -468,7 +468,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "4ae121a8-85ad-493d-aedf-7db3f698135f",
+								"type": "text/javascript",
 								"exec": [
 									"// Test script for Get all products",
 									"pm.test(\"Status code is 200\", function () {",
@@ -499,23 +499,19 @@
 									"        return;",
 									"    }",
 									"    ",
-									"    // Check the first product for required properties",
+									"    // Check the first product for expected properties",
 									"    const firstProduct = responseData[0];",
 									"    pm.expect(firstProduct).to.have.property('_id');",
 									"    pm.expect(firstProduct).to.have.property('title');",
 									"    pm.expect(firstProduct).to.have.property('description');",
 									"    pm.expect(firstProduct).to.have.property('price');",
 									"    pm.expect(firstProduct).to.have.property('stock');",
+									"    pm.expect(firstProduct).to.have.property('category');",
+									"    pm.expect(firstProduct).to.have.property('imageUrl');",
 									"    pm.expect(firstProduct).to.have.property('createdAt');",
 									"    pm.expect(firstProduct).to.have.property('updatedAt');",
-									"    ",
-									"    // Store a product ID for use in other requests",
-									"    pm.environment.set(\"productId\", firstProduct._id);",
 									"});"
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
+								]
 							}
 						},
 						{
