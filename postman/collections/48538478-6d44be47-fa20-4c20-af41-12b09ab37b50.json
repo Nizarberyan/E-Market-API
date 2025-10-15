@@ -27,7 +27,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/products/search?name=Laptop&category=High-performance laptop&minPrice=457&maxPrice=11111",
+									"raw": "{{baseUrl}}/products/search?name=Laptop&minPrice=457&maxPrice=11111",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -42,7 +42,8 @@
 										},
 										{
 											"key": "category",
-											"value": "High-performance laptop"
+											"value": "High-performance laptop",
+											"disabled": true
 										},
 										{
 											"key": "minPrice",
@@ -142,9 +143,8 @@
 									],
 									"variable": [
 										{
-											"id": "15d51284-59bc-4d0c-b314-ec736fdb046e",
 											"key": "id",
-											"value": "string"
+											"value": ""
 										}
 									]
 								}
