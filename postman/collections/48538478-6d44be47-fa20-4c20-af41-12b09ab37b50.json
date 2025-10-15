@@ -1591,6 +1591,63 @@
 				},
 				{
 					"name": "Create a new category",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d349d5ce-25ee-4f94-bb46-186fe6077c30",
+								"exec": [
+									"// Test script for Create a new category",
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"Response time is acceptable\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"});",
+									"",
+									"pm.test(\"Content-Type header is application/json\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\");",
+									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+									"});",
+									"",
+									"pm.test(\"Response is a valid JSON object\", function () {",
+									"    pm.response.to.be.json;",
+									"    const responseData = pm.response.json();",
+									"    pm.expect(responseData).to.be.an('object');",
+									"});",
+									"",
+									"pm.test(\"Category created with correct data\", function () {",
+									"    const responseData = pm.response.json();",
+									"    const requestData = JSON.parse(pm.request.body.raw);",
+									"    ",
+									"    pm.expect(responseData).to.have.property('_id');",
+									"    pm.expect(responseData.name).to.equal(requestData.name);",
+									"    pm.expect(responseData.description).to.equal(requestData.description);",
+									"    pm.expect(responseData).to.have.property('createdAt');",
+									"    pm.expect(responseData).to.have.property('updatedAt');",
+									"});",
+									"",
+									"// Store the created category ID for use in other requests",
+									"if (pm.response.code === 201) {",
+									"    const responseData = pm.response.json();",
+									"    pm.environment.set(\"categoryId\", responseData._id);",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "048ac11f-8aff-429d-9e8d-b4c225564ecc",
+								"exec": [],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"id": "48538478-7c80f94e-036c-4398-8534-2972f580351b",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
