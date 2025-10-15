@@ -542,7 +542,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "68efa4cb076e042038b4f6e4"
+											"value": "68efb85f4c86076ff3ab6915"
 										}
 									]
 								}
@@ -1024,7 +1024,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"title\": \"water\",\n    \"description\": \"High-performance water\",\n    \"price\": 8999,\n    \"stock\": 10,\n    \"category\": \"507f1f77bcf86cd799439011\",\n    \"imageUrl\": \"https://example.com/image.jpg\"\n}",
+							"raw": "{\n    \"title\": \"charger\",\n    \"description\": \"High-performance charger\",\n    \"price\": 899,\n    \"stock\": 100,\n    \"category\": \"507f1f77bcf86cd799439011\",\n    \"imageUrl\": \"https://example.com/image.jpg\"\n}",
 							"options": {
 								"raw": {
 									"headerFamily": "json",
