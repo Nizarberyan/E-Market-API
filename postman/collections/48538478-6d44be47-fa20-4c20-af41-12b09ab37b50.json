@@ -264,7 +264,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrl}}/products/search?name=Laptop&minPrice=457&maxPrice=11111",
+									"raw": "{{baseUrl}}/products/search?name=water",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -275,7 +275,7 @@
 									"query": [
 										{
 											"key": "name",
-											"value": "Laptop"
+											"value": "water"
 										},
 										{
 											"key": "category",
@@ -284,11 +284,13 @@
 										},
 										{
 											"key": "minPrice",
-											"value": "457"
+											"value": "457",
+											"disabled": true
 										},
 										{
 											"key": "maxPrice",
-											"value": "11111"
+											"value": "11111",
+											"disabled": true
 										}
 									]
 								}
