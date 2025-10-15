@@ -1,8 +1,8 @@
-const User = require('../models/User');
-const { userSchema } = require('../utils/validators');
-const mongoose = require('mongoose');
+import User from '../models/User.js';
+import { userSchema } from '../utils/validators.js';
+import mongoose from 'mongoose';
 
-exports.getAllUsers = async (req, res, next) => {
+export const getAllUsers = async (req, res, next) => {
   try {
     const users = await User.find().select('-password');
     res.json(users);
@@ -11,7 +11,7 @@ exports.getAllUsers = async (req, res, next) => {
   }
 };
 
-exports.getUserById = async (req, res, next) => {
+export const getUserById = async (req, res, next) => {
   try {
     if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
       return res.status(400).json({ message: 'Invalid user ID' });
@@ -26,7 +26,7 @@ exports.getUserById = async (req, res, next) => {
   }
 };
 
-exports.createUser = async (req, res, next) => {
+export const createUser = async (req, res, next) => {
   try {
     await userSchema.validate(req.body);
     const existingUser = await User.findOne({ email: req.body.email });
@@ -45,7 +45,7 @@ exports.createUser = async (req, res, next) => {
   }
 };
 
-exports.deleteUser = async (req, res, next) => {
+export const deleteUser = async (req, res, next) => {
   try {
     if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
       return res.status(400).json({ message: 'Invalid user ID' });

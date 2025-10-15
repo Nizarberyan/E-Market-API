@@ -106,7 +106,7 @@ E-Market-API/
 - imageUrl: optional valid URL
 
 ### User Validation
-- fullname: required string
+- fullName: required string
 - email: required valid email (unique)
 - password: required string (min 6 characters)
 - role: optional ('user' or 'admin', defaults to 'user')

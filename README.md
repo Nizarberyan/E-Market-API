@@ -74,12 +74,12 @@ Each product is stored in MongoDB with the following fields:
 
 Users are registered in the database to simulate accounts for the future e-commerce platform.
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| fullname | String | ✅ | User's full name |
-| email | String | ✅ | Unique email |
-| password | String | ✅ | Password (not encrypted for now) |
-| role | String | ❌ | Default value: "user" (can be "admin") |
+| Field     | Type | Required | Description |
+|-----------|------|----------|-------------|
+| fullName  | String | ✅ | User's full name |
+| email     | String | ✅ | Unique email |
+| password  | String | ✅ | Password (not encrypted for now) |
+| role      | String | ❌ | Default value: "user" (can be "admin") |
 | createdAt | Date | Auto | Registration date |
 
 #### Routes to Implement
@@ -92,7 +92,7 @@ Users are registered in the database to simulate accounts for the future e-comme
 #### Rules and Validations
 
 - Check that email doesn't already exist before insertion
-- Required fields: fullname, email, password
+- Required fields: fullName, email, password
 - Structure ready to integrate encryption and JWT authentication in the next brief
 
 ### ⚙️ Middleware & Structure

@@ -1,7 +1,4 @@
-const swaggerUi = require('swagger-ui-express');
-const YAML = require('yamljs');
-const path = require('path');
+import swaggerUi from 'swagger-ui-express';
+import swaggerDocument from '../docs/swagger.yaml' with { type: 'yaml' };
 
-const swaggerDocument = YAML.load(path.join(__dirname, '../docs/swagger.yaml'));
-
-module.exports = { swaggerUi, swaggerDocument };
+export { swaggerUi, swaggerDocument };

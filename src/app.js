@@ -1,17 +1,18 @@
-const express = require('express');
-const logger = require('./middlewares/logger');
-const errorHandler = require('./middlewares/errorHandler');
-const notFound = require('./middlewares/notFound');
-const productRoutes = require('./routes/productRoutes');
-const userRoutes = require('./routes/userRoutes');
-const categoryRoutes = require('./routes/categoryRoutes');
-const { swaggerUi, swaggerDocument } = require('./swagger');
+import express from 'express';
+import logger from './middlewares/logger.js';
+import errorHandler from './middlewares/errorHandler.js';
+import notFound from './middlewares/notFound.js';
+import productRoutes from './routes/productRoutes.js';
+import userRoutes from './routes/userRoutes.js';
+import categoryRoutes from './routes/categoryRoutes.js';
+import { swaggerUi, swaggerDocument } from './swagger.js';
 
 const app = express();
 
 app.use(express.json());
 app.use(logger);
 
+app.get('/', (req, res) => res.redirect('/api-docs'));
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use('/products', productRoutes);
 app.use('/users', userRoutes);
@@ -20,4 +21,4 @@ app.use('/categories', categoryRoutes);
 app.use(notFound);
 app.use(errorHandler);
 
-module.exports = app;
+export default app;

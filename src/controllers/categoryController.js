@@ -1,8 +1,8 @@
-const Category = require('../models/Category');
-const { categorySchema } = require('../utils/validators');
-const mongoose = require('mongoose');
+import Category from '../models/Category.js';
+import { categorySchema } from '../utils/validators.js';
+import mongoose from 'mongoose';
 
-exports.getAllCategories = async (req, res, next) => {
+export const getAllCategories = async (req, res, next) => {
   try {
     const categories = await Category.find();
     res.json(categories);
@@ -11,7 +11,7 @@ exports.getAllCategories = async (req, res, next) => {
   }
 };
 
-exports.getCategoryById = async (req, res, next) => {
+export const getCategoryById = async (req, res, next) => {
   try {
     if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
       return res.status(400).json({ message: 'Invalid category ID' });
@@ -26,7 +26,7 @@ exports.getCategoryById = async (req, res, next) => {
   }
 };
 
-exports.createCategory = async (req, res, next) => {
+export const createCategory = async (req, res, next) => {
   try {
     await categorySchema.validate(req.body);
     const category = await Category.create(req.body);
@@ -39,7 +39,7 @@ exports.createCategory = async (req, res, next) => {
   }
 };
 
-exports.updateCategory = async (req, res, next) => {
+export const updateCategory = async (req, res, next) => {
   try {
     if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
       return res.status(400).json({ message: 'Invalid category ID' });
@@ -58,7 +58,7 @@ exports.updateCategory = async (req, res, next) => {
   }
 };
 
-exports.deleteCategory = async (req, res, next) => {
+export const deleteCategory = async (req, res, next) => {
   try {
     if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
       return res.status(400).json({ message: 'Invalid category ID' });

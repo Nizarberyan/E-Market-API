@@ -62,7 +62,7 @@ curl -X POST http://localhost:3000/products \
 curl -X POST http://localhost:3000/users \
   -H "Content-Type: application/json" \
   -d '{
-    "fullname": "John Doe",
+    "fullName": "John Doe",
     "email": "john@example.com",
     "password": "password123"
   }'

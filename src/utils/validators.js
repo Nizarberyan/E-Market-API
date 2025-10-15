@@ -1,6 +1,6 @@
-const yup = require('yup');
+import * as yup from 'yup';
 
-const productSchema = yup.object({
+export const productSchema = yup.object({
   title: yup.string().required(),
   description: yup.string().required(),
   price: yup.number().positive().required(),
@@ -9,16 +9,14 @@ const productSchema = yup.object({
   imageUrl: yup.string().url()
 });
 
-const userSchema = yup.object({
-  fullname: yup.string().required(),
+export const userSchema = yup.object({
+  fullName: yup.string().required(),
   email: yup.string().email().required(),
   password: yup.string().min(6).required(),
   role: yup.string().oneOf(['user', 'admin'])
 });
 
-const categorySchema = yup.object({
+export const categorySchema = yup.object({
   name: yup.string().required(),
   description: yup.string().required()
 });
-
-module.exports = { productSchema, userSchema, categorySchema };

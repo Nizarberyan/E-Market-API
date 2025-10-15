@@ -1,8 +1,8 @@
-const Product = require('../models/Product');
-const { productSchema } = require('../utils/validators');
-const mongoose = require('mongoose');
+import Product from '../models/Product.js';
+import { productSchema } from '../utils/validators.js';
+import mongoose from 'mongoose';
 
-exports.getAllProducts = async (req, res, next) => {
+export const getAllProducts = async (req, res, next) => {
   try {
     const products = await Product.find().populate('category');
     res.json(products);
@@ -11,7 +11,7 @@ exports.getAllProducts = async (req, res, next) => {
   }
 };
 
-exports.getProductById = async (req, res, next) => {
+export const getProductById = async (req, res, next) => {
   try {
     if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
       return res.status(400).json({ message: 'Invalid product ID' });
@@ -26,7 +26,7 @@ exports.getProductById = async (req, res, next) => {
   }
 };
 
-exports.createProduct = async (req, res, next) => {
+export const createProduct = async (req, res, next) => {
   try {
     await productSchema.validate(req.body);
     const product = await Product.create(req.body);
@@ -39,7 +39,7 @@ exports.createProduct = async (req, res, next) => {
   }
 };
 
-exports.updateProduct = async (req, res, next) => {
+export const updateProduct = async (req, res, next) => {
   try {
     if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
       return res.status(400).json({ message: 'Invalid product ID' });
@@ -58,7 +58,7 @@ exports.updateProduct = async (req, res, next) => {
   }
 };
 
-exports.deleteProduct = async (req, res, next) => {
+export const deleteProduct = async (req, res, next) => {
   try {
     if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
       return res.status(400).json({ message: 'Invalid product ID' });
@@ -73,7 +73,7 @@ exports.deleteProduct = async (req, res, next) => {
   }
 };
 
-exports.searchProducts = async (req, res, next) => {
+export const searchProducts = async (req, res, next) => {
   try {
     const { name, category, minPrice, maxPrice } = req.query;
     const filter = {};
