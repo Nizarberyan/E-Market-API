@@ -776,7 +776,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"type": "text/javascript",
+								"id": "839c4c88-fcf4-46ac-af63-ef67a876eb10",
 								"exec": [
 									"// Test script for Create a new product",
 									"pm.test(\"Status code is 201\", function () {",
@@ -839,15 +839,22 @@
 									"        console.log(\"Saved product ID to environment variable: productId\");",
 									"    }",
 									"}"
-								]
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
 							}
 						},
 						{
 							"listen": "prerequest",
 							"script": {
 								"id": "028e78b0-da40-4b9b-8daa-65dc6fda5c33",
-								"exec": [],
-								"type": "text/javascript"
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
 							}
 						}
 					],
