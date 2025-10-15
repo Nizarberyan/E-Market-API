@@ -278,11 +278,6 @@
 											"value": "Laptop 2"
 										},
 										{
-											"key": "category",
-											"value": "High-performance laptop",
-											"disabled": true
-										},
-										{
 											"key": "minPrice",
 											"value": "457"
 										},
