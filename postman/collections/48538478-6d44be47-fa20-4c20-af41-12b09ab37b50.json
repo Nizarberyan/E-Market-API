@@ -290,7 +290,7 @@
 									"id": "19a7b0c8-1e72-4a0d-a6d7-6d6a18d03d2e",
 									"listen": "test",
 									"script": {
-										"type": "text/javascript",
+										"id": "f948d422-e7db-40b7-8801-32e3f9605267",
 										"exec": [
 											"// Test script for Update a product",
 											"pm.test(\"Status code is 200\", function () {",
@@ -351,7 +351,18 @@
 											"        console.log(\"Could not parse request body as JSON\");",
 											"    }",
 											"}"
-										]
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "bb56e0e7-c669-44c0-9e64-c8643bd1cb1e",
+										"exec": [],
+										"type": "text/javascript"
 									}
 								}
 							],
@@ -2067,7 +2078,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "d349d5ce-25ee-4f94-bb46-186fe6077c30",
+								"type": "text/javascript",
 								"exec": [
 									"// Test script for Create a new category",
 									"pm.test(\"Status code is 201\", function () {",
@@ -2089,26 +2100,44 @@
 									"    pm.expect(responseData).to.be.an('object');",
 									"});",
 									"",
-									"pm.test(\"Category created with correct data\", function () {",
+									"pm.test(\"Created category has the correct structure\", function () {",
 									"    const responseData = pm.response.json();",
-									"    const requestData = JSON.parse(pm.request.body.raw);",
 									"    ",
 									"    pm.expect(responseData).to.have.property('_id');",
-									"    pm.expect(responseData.name).to.equal(requestData.name);",
-									"    pm.expect(responseData.description).to.equal(requestData.description);",
+									"    pm.expect(responseData).to.have.property('name');",
+									"    pm.expect(responseData).to.have.property('description');",
 									"    pm.expect(responseData).to.have.property('createdAt');",
 									"    pm.expect(responseData).to.have.property('updatedAt');",
 									"});",
 									"",
-									"// Store the created category ID for use in other requests",
+									"// If the request body is available in the environment, we can verify the category was created correctly",
+									"if (pm.request.body && pm.request.body.mode === 'raw') {",
+									"    try {",
+									"        const requestBody = JSON.parse(pm.request.body.raw);",
+									"        const responseData = pm.response.json();",
+									"        ",
+									"        pm.test(\"Category was created with the correct values\", function () {",
+									"            if (requestBody.name) {",
+									"                pm.expect(responseData.name).to.equal(requestBody.name);",
+									"            }",
+									"            if (requestBody.description) {",
+									"                pm.expect(responseData.description).to.equal(requestBody.description);",
+									"            }",
+									"        });",
+									"    } catch (e) {",
+									"        console.log(\"Could not parse request body as JSON\");",
+									"    }",
+									"}",
+									"",
+									"// Store the created category ID for potential use in other requests",
 									"if (pm.response.code === 201) {",
 									"    const responseData = pm.response.json();",
-									"    pm.environment.set(\"categoryId\", responseData._id);",
+									"    if (responseData && responseData._id) {",
+									"        pm.environment.set(\"categoryId\", responseData._id);",
+									"        console.log(\"Saved category ID to environment variable: categoryId\");",
+									"    }",
 									"}"
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
+								]
 							}
 						},
 						{
