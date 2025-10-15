@@ -993,6 +993,52 @@
 						},
 						{
 							"name": "Delete a user",
+							"event": [
+								{
+									"id": "b71c99b6-fdc6-4fc1-9afd-2c95c02cfdaa",
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"// Test script for Delete a user",
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"Response time is acceptable\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(1000);",
+											"});",
+											"",
+											"pm.test(\"Content-Type header is application/json\", function () {",
+											"    pm.response.to.have.header(\"Content-Type\");",
+											"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+											"});",
+											"",
+											"pm.test(\"Response is a valid JSON object\", function () {",
+											"    pm.response.to.be.json;",
+											"    const responseData = pm.response.json();",
+											"    pm.expect(responseData).to.be.an('object');",
+											"});",
+											"",
+											"pm.test(\"Response contains success message\", function () {",
+											"    const responseData = pm.response.json();",
+											"    pm.expect(responseData).to.have.property('message');",
+											"    pm.expect(responseData.message).to.include('deleted');",
+											"});",
+											"",
+											"pm.test(\"Response contains deleted user ID\", function () {",
+											"    const responseData = pm.response.json();",
+											"    const requestedId = pm.request.url.path[1];",
+											"    ",
+											"    // Check if the response contains the user ID that was deleted",
+											"    // This assumes the API returns the deleted user ID in some form",
+											"    pm.expect(responseData).to.have.property('id');",
+											"    pm.expect(responseData.id).to.equal(requestedId);",
+											"});"
+										]
+									}
+								}
+							],
 							"id": "48538478-530b4bd7-7fa4-4c4c-9e61-856d8d16fa18",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
