@@ -1424,7 +1424,8 @@
 							"path": [
 								"categories"
 							]
-						}
+						},
+						"description": "## Get All Categories\n\nThis endpoint retrieves a list of all product categories available in the E-Market system.\n\n### Request\n- **Method:** GET\n- **Endpoint:** `/categories`\n- **Headers:** \n  - `Accept: application/json` (Required)\n\n### Response\n- **Status Code:** 200 OK\n- **Content Type:** application/json\n- **Body Format:** Array of category objects\n\n### Response Body Structure\nEach category object in the response array contains the following properties:\n\n| Property | Type | Description |\n|----------|------|-------------|\n| _id | String | Unique identifier for the category |\n| name | String | Display name of the category |\n| description | String | Detailed description of the category |\n| createdAt | String (ISO Date) | Timestamp when the category was created |\n| updatedAt | String (ISO Date) | Timestamp when the category was last updated |\n| __v | Number | Version number (internal use) |\n\n### Example Response\n```json\n[\n  {\n    \"_id\": \"68ef8155076e042038b4f6de\",\n    \"name\": \"Electronics\",\n    \"description\": \"Electronic devices and accessories\",\n    \"createdAt\": \"2025-10-15T11:11:17.838Z\",\n    \"updatedAt\": \"2025-10-15T11:11:17.838Z\",\n    \"__v\": 0\n  }\n]\n```\n\n### Notes\n- This endpoint returns all categories without pagination\n- No authentication is required to access this endpoint\n- Use this endpoint to populate category filters or dropdown menus in your application"
 					},
 					"response": [
 						{
