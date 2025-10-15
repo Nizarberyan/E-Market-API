@@ -27,7 +27,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/products/search?name=string&category=string&minPrice=4573.0907885445695&maxPrice=4573.0907885445695",
+									"raw": "{{baseUrl}}/products/search?name=Laptop&minPrice=457&maxPrice=11111",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -38,19 +38,20 @@
 									"query": [
 										{
 											"key": "name",
-											"value": "string"
+											"value": "Laptop"
 										},
 										{
 											"key": "category",
-											"value": "string"
+											"value": "High-performance laptop",
+											"disabled": true
 										},
 										{
 											"key": "minPrice",
-											"value": "4573.0907885445695"
+											"value": "457"
 										},
 										{
 											"key": "maxPrice",
-											"value": "4573.0907885445695"
+											"value": "11111"
 										}
 									]
 								}
@@ -142,9 +143,8 @@
 									],
 									"variable": [
 										{
-											"id": "15d51284-59bc-4d0c-b314-ec736fdb046e",
 											"key": "id",
-											"value": "string"
+											"value": "68efa4cb076e042038b4f6e4"
 										}
 									]
 								}
@@ -261,9 +261,8 @@
 									],
 									"variable": [
 										{
-											"id": "8db19bba-dbbd-4db1-80e3-ce578618ed3a",
 											"key": "id",
-											"value": "string"
+											"value": "68efa4cb076e042038b4f6e4"
 										}
 									]
 								}
@@ -686,9 +685,8 @@
 									],
 									"variable": [
 										{
-											"id": "edc273bb-e3f0-4628-bbfd-7d16f5ec1fda",
 											"key": "id",
-											"value": "string"
+											"value": "68ecbcce92be6c8abb25dbd7"
 										}
 									]
 								}
@@ -940,7 +938,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"fullname\": \"John Doe\",\n  \"email\": \"john@example.com\",\n  \"password\": \"password123\",\n  \"role\": \"user\"\n}",
+							"raw": "{\n    \"fullName\": \"Nizar Beriane\",\n    \"email\": \"nizar@gmail.com\",\n    \"password\": \"password123\",\n    \"role\": \"user\"\n}",
 							"options": {
 								"raw": {
 									"headerFamily": "json",
@@ -1405,6 +1403,77 @@
 				},
 				{
 					"name": "Get all categories",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "944f93c5-ad65-4161-bea2-6b908f01f9e4",
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "7a03ade1-4717-4e41-8012-d8d84e5a92db",
+								"exec": [
+									"// Test for successful response",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"// Test for correct content type",
+									"pm.test(\"Content-Type header is application/json\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\");",
+									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+									"});",
+									"",
+									"// Test that response is an array",
+									"pm.test(\"Response is an array\", function () {",
+									"    const responseData = pm.response.json();",
+									"    pm.expect(Array.isArray(responseData)).to.be.true;",
+									"});",
+									"",
+									"// Test the structure of category objects in the array",
+									"pm.test(\"Categories have the correct structure\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    // Skip test if array is empty",
+									"    if (responseData.length === 0) {",
+									"        pm.test.skip(\"Array is empty, skipping structure validation\");",
+									"        return;",
+									"    }",
+									"    ",
+									"    // Check structure of each category object",
+									"    responseData.forEach((category, index) => {",
+									"        pm.expect(category).to.have.property(\"_id\");",
+									"        pm.expect(category).to.have.property(\"name\");",
+									"        pm.expect(category).to.have.property(\"description\");",
+									"        pm.expect(category).to.have.property(\"createdAt\");",
+									"        pm.expect(category).to.have.property(\"updatedAt\");",
+									"        pm.expect(category).to.have.property(\"__v\");",
+									"        ",
+									"        // Validate data types",
+									"        pm.expect(category._id).to.be.a(\"string\");",
+									"        pm.expect(category.name).to.be.a(\"string\");",
+									"        pm.expect(category.description).to.be.a(\"string\");",
+									"        ",
+									"        // Validate date formats",
+									"        pm.expect(new Date(category.createdAt).toString()).to.not.equal(\"Invalid Date\");",
+									"        pm.expect(new Date(category.updatedAt).toString()).to.not.equal(\"Invalid Date\");",
+									"    });",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
 					"id": "48538478-44b4539e-3082-4b60-b901-23d736bae4a9",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
@@ -1425,7 +1494,8 @@
 							"path": [
 								"categories"
 							]
-						}
+						},
+						"description": "## Get All Categories\n\nThis endpoint retrieves a list of all product categories available in the E-Market system.\n\n### Request\n- **Method:** GET\n- **Endpoint:** `/categories`\n- **Headers:** \n  - `Accept: application/json` (Required)\n\n### Response\n- **Status Code:** 200 OK\n- **Content Type:** application/json\n- **Body Format:** Array of category objects\n\n### Response Body Structure\nEach category object in the response array contains the following properties:\n\n| Property | Type | Description |\n|----------|------|-------------|\n| _id | String | Unique identifier for the category |\n| name | String | Display name of the category |\n| description | String | Detailed description of the category |\n| createdAt | String (ISO Date) | Timestamp when the category was created |\n| updatedAt | String (ISO Date) | Timestamp when the category was last updated |\n| __v | Number | Version number (internal use) |\n\n### Example Response\n```json\n[\n  {\n    \"_id\": \"68ef8155076e042038b4f6de\",\n    \"name\": \"Electronics\",\n    \"description\": \"Electronic devices and accessories\",\n    \"createdAt\": \"2025-10-15T11:11:17.838Z\",\n    \"updatedAt\": \"2025-10-15T11:11:17.838Z\",\n    \"__v\": 0\n  }\n]\n```\n\n### Notes\n- This endpoint returns all categories without pagination\n- No authentication is required to access this endpoint\n- Use this endpoint to populate category filters or dropdown menus in your application"
 					},
 					"response": [
 						{
