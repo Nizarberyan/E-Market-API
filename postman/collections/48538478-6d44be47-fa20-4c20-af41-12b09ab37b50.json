@@ -1421,6 +1421,62 @@
 						},
 						{
 							"name": "Delete a category",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "cd5f5c17-5053-4dce-9b02-effb9346fc99",
+										"exec": [
+											"// Test script for Delete a category",
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"Response time is acceptable\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(1000);",
+											"});",
+											"",
+											"pm.test(\"Content-Type header is application/json\", function () {",
+											"    pm.response.to.have.header(\"Content-Type\");",
+											"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+											"});",
+											"",
+											"pm.test(\"Response is a valid JSON object\", function () {",
+											"    pm.response.to.be.json;",
+											"    const responseData = pm.response.json();",
+											"    pm.expect(responseData).to.be.an('object');",
+											"});",
+											"",
+											"pm.test(\"Response contains success message\", function () {",
+											"    const responseData = pm.response.json();",
+											"    pm.expect(responseData).to.have.property('message');",
+											"    pm.expect(responseData.message).to.include('deleted');",
+											"});",
+											"",
+											"// Verify the deleted category no longer exists by sending a GET request",
+											"pm.sendRequest({",
+											"    url: pm.request.url.toString(),",
+											"    method: 'GET'",
+											"}, function (err, res) {",
+											"    pm.test(\"Category no longer exists\", function () {",
+											"        pm.expect(res.code).to.equal(404);",
+											"    });",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "21822edd-6071-4f4b-b5c1-56b5c36dcb54",
+										"exec": [],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"id": "48538478-8839be0b-b5b5-4b13-beb4-bd19788d042a",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
