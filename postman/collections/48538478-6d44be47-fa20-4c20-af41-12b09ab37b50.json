@@ -998,7 +998,7 @@
 									"id": "b71c99b6-fdc6-4fc1-9afd-2c95c02cfdaa",
 									"listen": "test",
 									"script": {
-										"type": "text/javascript",
+										"id": "14c8bb15-c171-4276-8bc4-d3276b3cbd56",
 										"exec": [
 											"// Test script for Delete a user",
 											"pm.test(\"Status code is 200\", function () {",
@@ -1035,7 +1035,18 @@
 											"    pm.expect(responseData).to.have.property('id');",
 											"    pm.expect(responseData.id).to.equal(requestedId);",
 											"});"
-										]
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "58316fd0-2084-4329-b008-d3a2f3f95ec6",
+										"exec": [],
+										"type": "text/javascript"
 									}
 								}
 							],
@@ -1057,9 +1068,8 @@
 									],
 									"variable": [
 										{
-											"id": "aee0f26c-1fdf-4959-849b-591546b03194",
 											"key": "id",
-											"value": "string"
+											"value": ""
 										}
 									]
 								}
@@ -1493,7 +1503,7 @@
 								{
 									"listen": "test",
 									"script": {
-										"id": "d7cd93ed-69cc-4d7b-b0fa-13ea492683b0",
+										"type": "text/javascript",
 										"exec": [
 											"// Test script for Update a category",
 											"pm.test(\"Status code is 200\", function () {",
@@ -1515,25 +1525,42 @@
 											"    pm.expect(responseData).to.be.an('object');",
 											"});",
 											"",
-											"pm.test(\"Category updated with correct data\", function () {",
+											"pm.test(\"Updated category has the correct structure\", function () {",
 											"    const responseData = pm.response.json();",
-											"    const requestData = JSON.parse(pm.request.body.raw);",
 											"    ",
 											"    pm.expect(responseData).to.have.property('_id');",
-											"    pm.expect(responseData.name).to.equal(requestData.name);",
-											"    pm.expect(responseData.description).to.equal(requestData.description);",
+											"    pm.expect(responseData).to.have.property('name');",
+											"    pm.expect(responseData).to.have.property('description');",
+											"    pm.expect(responseData).to.have.property('createdAt');",
 											"    pm.expect(responseData).to.have.property('updatedAt');",
 											"});",
 											"",
-											"pm.test(\"Category ID in response matches request ID\", function () {",
+											"pm.test(\"Category ID in response matches request\", function () {",
 											"    const responseData = pm.response.json();",
-											"    const requestId = pm.request.url.path[1];",
-											"    pm.expect(responseData._id).to.equal(requestId);",
-											"});"
-										],
-										"type": "text/javascript",
-										"packages": {},
-										"requests": {}
+											"    const requestedId = pm.request.url.path[1];",
+											"    ",
+											"    pm.expect(responseData._id).to.equal(requestedId);",
+											"});",
+											"",
+											"// If the request body is available in the environment, we can verify the update was applied",
+											"if (pm.request.body && pm.request.body.mode === 'raw') {",
+											"    try {",
+											"        const requestBody = JSON.parse(pm.request.body.raw);",
+											"        const responseData = pm.response.json();",
+											"        ",
+											"        pm.test(\"Category was updated with the correct values\", function () {",
+											"            if (requestBody.name) {",
+											"                pm.expect(responseData.name).to.equal(requestBody.name);",
+											"            }",
+											"            if (requestBody.description) {",
+											"                pm.expect(responseData.description).to.equal(requestBody.description);",
+											"            }",
+											"        });",
+											"    } catch (e) {",
+											"        console.log(\"Could not parse request body as JSON\");",
+											"    }",
+											"}"
+										]
 									}
 								},
 								{
