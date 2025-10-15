@@ -27,7 +27,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/products/search?name=Laptop&category=65a6e4a3c55a6e1a3d2fc134&minPrice=457&maxPrice=11111",
+									"raw": "{{baseUrl}}/products/search?name=Laptop&category=65a6e4a3c55a6e1a3d2fc134",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -46,11 +46,13 @@
 										},
 										{
 											"key": "minPrice",
-											"value": "457"
+											"value": "457",
+											"disabled": true
 										},
 										{
 											"key": "maxPrice",
-											"value": "11111"
+											"value": "11111",
+											"disabled": true
 										}
 									]
 								}
