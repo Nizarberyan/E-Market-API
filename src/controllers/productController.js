@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 
 export const getAllProducts = async (req, res, next) => {
   try {
-    const products = await Product.find();
+    const products = await Product.find().populate('category');
     res.json(products);
   } catch (error) {
     next(error);
@@ -16,7 +16,7 @@ export const getProductById = async (req, res, next) => {
     if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
       return res.status(400).json({ message: 'Invalid product ID' });
     }
-    const product = await Product.findById(req.params.id);
+    const product = await Product.findById(req.params.id).populate('category');
     if (!product) {
       return res.status(404).json({ message: 'Product not found' });
     }
@@ -29,7 +29,7 @@ export const getProductById = async (req, res, next) => {
 export const createProduct = async (req, res, next) => {
   try {
     await productSchema.validate(req.body);
-    const product = await Product.create(req.body);
+    const product = await (await Product.create(req.body)).populate('category');
     res.status(201).json(product);
   } catch (error) {
     if (error.name === 'ValidationError') {
@@ -45,7 +45,7 @@ export const updateProduct = async (req, res, next) => {
       return res.status(400).json({ message: 'Invalid product ID' });
     }
     await productSchema.validate(req.body, { strict: false });
-    const product = await Product.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    const product = await Product.findByIdAndUpdate(req.params.id, req.body, { new: true }).populate('category');
     if (!product) {
       return res.status(404).json({ message: 'Product not found' });
     }
@@ -86,7 +86,7 @@ export const searchProducts = async (req, res, next) => {
       if (maxPrice) filter.price.$lte = Number(maxPrice);
     }
     
-    const products = await Product.find(filter);
+    const products = await Product.find(filter).populate('category');
     res.json(products);
   } catch (error) {
     next(error);
