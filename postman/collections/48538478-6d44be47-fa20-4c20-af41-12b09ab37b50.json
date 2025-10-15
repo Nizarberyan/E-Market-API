@@ -27,7 +27,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/products/search?name=Laptop&category=65a6e4a3c55a6e1a3d2fc134",
+									"raw": "{{baseUrl}}/products/search?name=Laptop&category=High-performance laptop",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -42,7 +42,7 @@
 										},
 										{
 											"key": "category",
-											"value": "65a6e4a3c55a6e1a3d2fc134"
+											"value": "High-performance laptop"
 										},
 										{
 											"key": "minPrice",
