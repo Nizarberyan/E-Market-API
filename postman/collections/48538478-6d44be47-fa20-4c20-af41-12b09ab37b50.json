@@ -656,7 +656,7 @@
 									"id": "131f7cee-be96-4ccc-89ab-64f10da5c5fa",
 									"listen": "test",
 									"script": {
-										"type": "text/javascript",
+										"id": "34f5454d-105c-4e0b-bdd6-47d15cdbd251",
 										"exec": [
 											"// Test script for Delete a product",
 											"pm.test(\"Status code is 200\", function () {",
@@ -693,7 +693,18 @@
 											"    pm.expect(responseData).to.have.property('id');",
 											"    pm.expect(responseData.id).to.equal(requestedId);",
 											"});"
-										]
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "5702fe4b-d8f9-4fce-be7b-2ec4f1e6ba92",
+										"exec": [],
+										"type": "text/javascript"
 									}
 								}
 							],
@@ -715,9 +726,8 @@
 									],
 									"variable": [
 										{
-											"id": "c57e188d-f1f9-4b5f-91fa-a5661b61a201",
 											"key": "id",
-											"value": "string"
+											"value": ""
 										}
 									]
 								}
