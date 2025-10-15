@@ -68,7 +68,7 @@
 											"        pm.expect(product, `Product at index ${index}`).to.have.property('stock').that.is.a('number');",
 											"        pm.expect(product, `Product at index ${index}`).to.have.property('category').that.is.a('string');",
 											"        pm.expect(product, `Product at index ${index}`).to.have.property('imageUrl').that.is.a('string');",
-											"        pm.expect(product, `Product at index ${index}`).to.have.property('createdAt').that.is.a('string');",
+											"        pm.expect(product, `Product at index ${index}`).to.have.property('createdAt').that.is.a('string');        pm.expect(product, `Product at index ${index}`).to.have.property('createdAt').that.is.a('string');",
 											"        pm.expect(product, `Product at index ${index}`).to.have.property('updatedAt').that.is.a('string');",
 											"    });",
 											"});",
@@ -236,7 +236,7 @@
 								{
 									"listen": "prerequest",
 									"script": {
-										"id": "423dab90-1135-48e6-9797-985ec6abc84e",
+										"id": "789396ae-eb5f-4d74-8957-e79c1184c22d",
 										"exec": [],
 										"type": "text/javascript"
 									}
