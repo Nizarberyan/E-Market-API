@@ -27,7 +27,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/products/search?name=stringLaptop&category=High-performance laptop&minPrice=457&maxPrice=457",
+									"raw": "{{baseUrl}}/products/search?name=sLaptop&category=65a6e4a3c55a6e1a3d2fc134&minPrice=457&maxPrice=4573",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -38,11 +38,11 @@
 									"query": [
 										{
 											"key": "name",
-											"value": "stringLaptop"
+											"value": "sLaptop"
 										},
 										{
 											"key": "category",
-											"value": "High-performance laptop"
+											"value": "65a6e4a3c55a6e1a3d2fc134"
 										},
 										{
 											"key": "minPrice",
@@ -50,7 +50,7 @@
 										},
 										{
 											"key": "maxPrice",
-											"value": "457"
+											"value": "4573"
 										}
 									]
 								}
