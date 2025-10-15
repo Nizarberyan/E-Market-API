@@ -464,6 +464,69 @@
 				},
 				{
 					"name": "Get all products",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4ae121a8-85ad-493d-aedf-7db3f698135f",
+								"exec": [
+									"// Test script for Get all products",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response time is acceptable\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"});",
+									"",
+									"pm.test(\"Content-Type header is application/json\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\");",
+									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+									"});",
+									"",
+									"pm.test(\"Response is a valid JSON array\", function () {",
+									"    pm.response.to.be.json;",
+									"    const responseData = pm.response.json();",
+									"    pm.expect(responseData).to.be.an('array');",
+									"});",
+									"",
+									"pm.test(\"Products have the correct structure\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    // Skip test if no products are returned",
+									"    if (responseData.length === 0) {",
+									"        pm.test.skip(\"No products to check structure\");",
+									"        return;",
+									"    }",
+									"    ",
+									"    // Check the first product for required properties",
+									"    const firstProduct = responseData[0];",
+									"    pm.expect(firstProduct).to.have.property('_id');",
+									"    pm.expect(firstProduct).to.have.property('title');",
+									"    pm.expect(firstProduct).to.have.property('description');",
+									"    pm.expect(firstProduct).to.have.property('price');",
+									"    pm.expect(firstProduct).to.have.property('stock');",
+									"    pm.expect(firstProduct).to.have.property('createdAt');",
+									"    pm.expect(firstProduct).to.have.property('updatedAt');",
+									"    ",
+									"    // Store a product ID for use in other requests",
+									"    pm.environment.set(\"productId\", firstProduct._id);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "f6468855-2c9b-46db-8580-10d2ab2cce98",
+								"exec": [],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"id": "48538478-198cc8db-d38b-4b60-a3a0-b3ace0d51ecb",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
@@ -1777,7 +1840,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"name\": \"Electronics\",\n  \"description\": \"Electronic devices and accessories\"\n}",
+							"raw": "{\n  \"name\": \"Water\",\n  \"description\": \"Water things\"\n}",
 							"options": {
 								"raw": {
 									"headerFamily": "json",
